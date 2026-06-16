@@ -1,0 +1,57 @@
+{
+  "appointment_policies": {
+    "new_patient_lead_time_days": 14,
+    "established_patient_lead_time_days": 3,
+    "same_day_availability": "Call clinic directly at (816) 555-0000 before 9 AM",
+    "cancellation_policy": "Cancel at least 24 hours in advance to avoid a $50 fee",
+    "reschedule_policy": "Rescheduling is free if done more than 24 hours in advance via the patient portal or by calling us",
+    "telehealth_available": true,
+    "telehealth_note": "Telehealth visits are available for established patients for follow-ups, minor illness, and prescription refills"
+  },
+  "referral_policies": {
+    "specialist_referral_required": ["Cardiology", "Neurology", "Orthopedics", "Rheumatology"],
+    "self_refer_allowed": ["Dermatology", "Obstetrics & Gynecology", "Ophthalmology"],
+    "referral_processing_days": 3
+  },
+  "emergency_protocol": {
+    "call_911_symptoms": [
+      "chest pain or tightness",
+      "difficulty breathing",
+      "sudden severe headache",
+      "loss of consciousness",
+      "stroke symptoms (face drooping, arm weakness, speech difficulty)",
+      "severe allergic reaction",
+      "uncontrolled bleeding",
+      "severe abdominal pain",
+      "thoughts of self-harm or suicide"
+    ],
+    "urgent_care_symptoms": [
+      "fever above 103°F",
+      "moderate pain not improving",
+      "minor cuts requiring stitches",
+      "suspected fractures",
+      "ear infection",
+      "urinary tract infection"
+    ],
+    "urgent_care_locations": [
+      {
+        "name": "CareNow Urgent Care - Lee's Summit",
+        "address": "770 NW Blue Pkwy, Lee's Summit, MO 64086",
+        "hours": "Mon-Fri 8am-8pm, Sat-Sun 9am-5pm",
+        "phone": "(816) 555-9911"
+      },
+      {
+        "name": "AdventHealth Centra Care - Overland Park",
+        "address": "6701 W 75th St, Overland Park, KS 66204",
+        "hours": "Daily 8am-8pm",
+        "phone": "(913) 555-9922"
+      }
+    ]
+  },
+  "prescription_policy": {
+    "refill_lead_time_days": 3,
+    "controlled_substance_note": "Controlled substances require an in-person visit every 90 days",
+    "prior_auth_process": "Our team will submit prior authorization within 2 business days. You will be notified by phone and portal message.",
+    "pharmacy_partners": ["Walgreens", "CVS", "Walmart Pharmacy", "HyVee Pharmacy"]
+  }
+}

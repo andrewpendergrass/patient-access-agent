@@ -1,0 +1,75 @@
+{
+  "plans": {
+    "Aetna": {
+      "accepted": true,
+      "network_name": "Aetna Choice POS II",
+      "copay_primary": "$25",
+      "copay_specialist": "$50",
+      "deductible_individual": "$1,500",
+      "prior_auth_required_for": ["MRI", "CT Scan", "Specialist Referrals (some)"],
+      "member_services": "1-800-872-3862",
+      "portal": "member.aetna.com"
+    },
+    "Blue Cross Blue Shield": {
+      "accepted": true,
+      "network_name": "BCBS BlueSelect",
+      "copay_primary": "$20",
+      "copay_specialist": "$45",
+      "deductible_individual": "$1,200",
+      "prior_auth_required_for": ["MRI", "Surgery", "Inpatient stays"],
+      "member_services": "1-800-810-2583",
+      "portal": "bcbs.com/member"
+    },
+    "UnitedHealth": {
+      "accepted": true,
+      "network_name": "UnitedHealthcare Choice Plus",
+      "copay_primary": "$30",
+      "copay_specialist": "$55",
+      "deductible_individual": "$1,800",
+      "prior_auth_required_for": ["Specialty drugs", "Durable medical equipment", "CT/MRI"],
+      "member_services": "1-866-801-4409",
+      "portal": "myuhc.com"
+    },
+    "Cigna": {
+      "accepted": true,
+      "network_name": "Cigna Open Access Plus",
+      "copay_primary": "$25",
+      "copay_specialist": "$50",
+      "deductible_individual": "$1,500",
+      "prior_auth_required_for": ["Specialty medications", "Surgery"],
+      "member_services": "1-800-244-6224",
+      "portal": "mycigna.com"
+    },
+    "Humana": {
+      "accepted": true,
+      "network_name": "Humana Gold Plus",
+      "copay_primary": "$20",
+      "copay_specialist": "$40",
+      "deductible_individual": "$1,000",
+      "prior_auth_required_for": ["MRI", "CT", "Specialty drugs"],
+      "member_services": "1-800-457-4708",
+      "portal": "humana.com/member"
+    },
+    "Medicare": {
+      "accepted": true,
+      "network_name": "Medicare Part B",
+      "copay_primary": "20% after deductible",
+      "copay_specialist": "20% after deductible",
+      "deductible_individual": "$240 (Part B annual)",
+      "prior_auth_required_for": ["Outpatient surgery", "Durable medical equipment"],
+      "member_services": "1-800-MEDICARE",
+      "portal": "medicare.gov"
+    },
+    "Medicaid": {
+      "accepted": true,
+      "network_name": "MO HealthNet",
+      "copay_primary": "$3",
+      "copay_specialist": "$3",
+      "deductible_individual": "None",
+      "prior_auth_required_for": ["Non-emergency transportation", "Some specialty services"],
+      "member_services": "1-800-392-2161",
+      "portal": "dss.mo.gov/mhd"
+    }
+  },
+  "not_accepted": ["Kaiser Permanente", "Tricare (some plans - call to verify)"]
+}
