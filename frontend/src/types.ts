@@ -22,6 +22,7 @@ export interface AgentResult {
   case_id: string;
   risk_level: string;
   intent: string;
+  retrieved_data: Record<string, unknown>;
 }
 
 export interface Case {

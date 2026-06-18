@@ -1,4 +1,4 @@
-import { AlertCircle, Badge, CheckCircle, ClipboardList, Tag } from "lucide-react";
+import { AlertCircle, CheckCircle, ClipboardList, Database, Tag } from "lucide-react";
 import { AgentResult } from "../types";
 
 const RISK_COLORS: Record<string, string> = {
@@ -17,7 +17,7 @@ const INTENT_LABELS: Record<string, string> = {
 };
 
 export function ResponsePanel({ result }: { result: AgentResult }) {
-  const { response, case_summary, case_id, risk_level, intent } = result;
+  const { response, case_summary, case_id, risk_level, intent, retrieved_data } = result;
   const riskClass = RISK_COLORS[risk_level] ?? RISK_COLORS.low;
 
   return (
@@ -87,6 +87,19 @@ export function ResponsePanel({ result }: { result: AgentResult }) {
               ))}
             </div>
           )}
+        </div>
+      )}
+
+      {/* Retrieved Data */}
+      {retrieved_data && Object.keys(retrieved_data).length > 0 && (
+        <div className="rounded-xl border border-slate-200 bg-white p-4 space-y-2">
+          <h3 className="flex items-center gap-1.5 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+            <Database className="w-3.5 h-3.5" />
+            Retrieved Data
+          </h3>
+          <pre className="text-xs text-slate-700 bg-slate-50 rounded-lg p-3 overflow-auto max-h-64 leading-relaxed">
+            {JSON.stringify(retrieved_data, null, 2)}
+          </pre>
         </div>
       )}
     </div>

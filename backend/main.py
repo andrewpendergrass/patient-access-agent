@@ -84,6 +84,7 @@ async def process_request(body: ProcessRequest):
                 "case_id": final_state.get("case_id", ""),
                 "risk_level": final_state.get("risk_level", "low"),
                 "intent": final_state.get("intent", "general"),
+                "retrieved_data": final_state.get("retrieved_data", {}),
             },
         }
         yield {"data": json.dumps(result)}
