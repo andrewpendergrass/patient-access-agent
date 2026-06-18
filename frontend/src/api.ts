@@ -35,6 +35,7 @@ export function streamRequest(
       const reader = res.body!.getReader();
       const decoder = new TextDecoder();
       let buffer = "";
+      let gotResult = false;
 
       while (true) {
         const { done, value } = await reader.read();
@@ -49,12 +50,19 @@ export function streamRequest(
             try {
               const msg = JSON.parse(raw);
               if (msg.type === "step") onStep(msg.data as AgentStep);
-              else if (msg.type === "result") onResult(msg.data as AgentResult);
+              else if (msg.type === "result") {
+                gotResult = true;
+                onResult(msg.data as AgentResult);
+              }
             } catch {
               // ignore parse errors on partial lines
             }
           }
         }
+      }
+
+      if (!gotResult) {
+        onError("Connection closed before a response was received.");
       }
     } catch (e: unknown) {
       if (e instanceof Error && e.name !== "AbortError") {

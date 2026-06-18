@@ -138,10 +138,10 @@ Only classify the request.
 
 Return ONLY valid JSON.
 
-{
+{{
   "intent": "<intent>",
   "risk_level": "<risk_level>",
-  "entities": {
+  "entities": {{
     "specialty": null,
     "language": null,
     "insurance": null,
@@ -150,9 +150,9 @@ Return ONLY valid JSON.
     "date_preference": null,
     "medical_concern": null,
     "patient_type": null
-  },
+  }},
   "reasoning": "<1-2 sentence explanation>"
-}
+}}
 
 Return no markdown.
 
