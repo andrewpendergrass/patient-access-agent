@@ -75,6 +75,9 @@ async def triage_node(state) -> dict:
     except json.JSONDecodeError:
         parsed = {"intent": "general", "risk_level": "low", "entities": {}, "reasoning": "Parse error"}
 
+    entities = parsed.get("entities") or {}
+    entities = {k: (v or "") for k, v in entities.items()}
+
     steps = _add_step(
         state, "triage",
         "Classifying Intent & Risk",
@@ -84,7 +87,7 @@ async def triage_node(state) -> dict:
     return {
         "intent": parsed["intent"],
         "risk_level": parsed["risk_level"],
-        "entities": parsed.get("entities", {}),
+        "entities": entities,
         "steps": steps,
     }
 
@@ -126,10 +129,10 @@ async def provider_lookup_node(state) -> dict:
     entities = state.get("entities", {})
     all_providers = _get_providers()["providers"]
 
-    specialty = entities.get("specialty", "").lower()
-    language = entities.get("language", "").lower()
-    insurance = entities.get("insurance", "").lower()
-    location = entities.get("location", "").lower()
+    specialty = (entities.get("specialty") or "").lower()
+    language = (entities.get("language") or "").lower()
+    insurance = (entities.get("insurance") or "").lower()
+    location = (entities.get("location") or "").lower()
 
     matches = all_providers
     if specialty:
@@ -221,7 +224,7 @@ async def insurance_node(state) -> dict:
 
     entities = state.get("entities", {})
     insurance_data = _get_insurance()
-    plan_name = entities.get("insurance", "")
+    plan_name = entities.get("insurance") or ""
 
     matched_plan = None
     for plan_key, plan_info in insurance_data["plans"].items():
@@ -287,7 +290,7 @@ async def prescription_node(state) -> dict:
         "steps": steps,
     }
 
-    
+
 async def synthesize_node(state) -> dict:
     from .mock_llm import mock_general_response, mock_case_summary
 
