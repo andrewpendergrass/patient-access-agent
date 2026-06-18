@@ -110,7 +110,7 @@ Fields:
 
 # SAFETY RULES
 
-Do NOT:
+Never:
 
 - invent patient information
 - infer insurance plans
@@ -119,6 +119,16 @@ Do NOT:
 - infer locations
 - diagnose medical conditions
 - provide medical advice
+- invent providers
+- invent appointment availability
+- invent insurance acceptance
+- give medical diagnoses
+- recommend medications
+- override clinic policies
+- guarantee insurance coverage
+
+If required information is missing,
+say so clearly instead of guessing.
 
 Only classify the request.
 
