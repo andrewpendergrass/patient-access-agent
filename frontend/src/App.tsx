@@ -30,9 +30,14 @@ const EXAMPLE_REQUESTS = [
     label: "Insurance question",
     text: "Does your clinic accept Blue Cross Blue Shield? What's my expected copay for a specialist visit?",
   },
+  {
+    label: "Prescription refill",
+    text: "I need to request a refill for my blood pressure medication. How do I do that and how long will it take?",
+  },
 ];
 
 type Tab = "agent" | "audit";
+
 
 export default function App() {
   const [tab, setTab] = useState<Tab>("agent");

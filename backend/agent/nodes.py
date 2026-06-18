@@ -60,8 +60,8 @@ async def triage_node(state) -> dict:
         from .prompts import TRIAGE_PROMPT
         llm = _llm()
         response = await llm.ainvoke([
-            SystemMessage(content=TRIAGE_PROMPT),
-            HumanMessage(content=state["request"]),
+            SystemMessage(content=TRIAGE_PROMPT.format(request=state["request"])),
+            HumanMessage(content="Analyze this patient request now."),
         ])
         raw = response.content.strip()
         if raw.startswith("```"):
@@ -260,6 +260,34 @@ async def insurance_node(state) -> dict:
     }
 
 
+async def prescription_node(state) -> dict:
+    policies = _get_policies()
+    rx_policy = policies["prescription_policy"]
+
+    steps = _add_step(
+        state, "prescription",
+        "Retrieving Prescription Policy",
+        f"Refill lead time: {rx_policy['refill_lead_time_days']} days | "
+        f"Partners: {', '.join(rx_policy['pharmacy_partners'][:3])}",
+    )
+
+    draft = (
+        f"Thank you for reaching out about your prescription!\n\n"
+        f"Here's how to request a refill:\n"
+        f"• **Patient Portal:** patientportal.clinicname.com (fastest)\n"
+        f"• **Phone:** (816) 555-0000 (allow {rx_policy['refill_lead_time_days']} business days)\n\n"
+        f"Please note: {rx_policy['controlled_substance_note']}\n\n"
+        f"We work with {', '.join(rx_policy['pharmacy_partners'])} for prescription fulfillment. "
+        f"If your medication requires prior authorization, {rx_policy['prior_auth_process']}"
+    )
+
+    return {
+        "retrieved_data": {"prescription_policy": rx_policy},
+        "draft_response": draft,
+        "steps": steps,
+    }
+
+    
 async def synthesize_node(state) -> dict:
     from .mock_llm import mock_general_response, mock_case_summary
 
