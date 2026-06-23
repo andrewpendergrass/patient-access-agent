@@ -35,6 +35,14 @@ def _get_insurance():
     return _insurance_cache
 
 
+def _specialty_match(entity: str, provider_specialty: str) -> bool:
+    e, s = entity.lower(), provider_specialty.lower()
+    if e in s or s in e:
+        return True
+    # prefix match handles "pediatrician" vs "Pediatrics", "cardiologist" vs "Cardiology"
+    return (len(e) >= 5 and s.startswith(e[:5])) or (len(s) >= 5 and e.startswith(s[:5]))
+
+
 def _llm():
     from langchain_anthropic import ChatAnthropic
     model = os.getenv("ANTHROPIC_MODEL", "claude-haiku-4-5-20251001")
@@ -136,7 +144,7 @@ async def provider_lookup_node(state) -> dict:
 
     matches = all_providers
     if specialty:
-        matches = [p for p in matches if specialty in p["specialty"].lower()]
+        matches = [p for p in matches if _specialty_match(specialty, p["specialty"])]
     if language:
         matches = [p for p in matches if any(language in lang.lower() for lang in p["languages"])]
     if insurance:
@@ -145,7 +153,7 @@ async def provider_lookup_node(state) -> dict:
         matches = [p for p in matches if location in p["location"].lower()]
 
     if not matches and specialty:
-        matches = [p for p in all_providers if specialty in p["specialty"].lower()]
+        matches = [p for p in all_providers if _specialty_match(specialty, p["specialty"])]
 
     top_matches = matches[:3]
 
